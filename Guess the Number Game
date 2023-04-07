@@ -1,0 +1,43 @@
+import java.util.Random;                                    //import random
+import java.util.Scanner;                                   //import scanner file
+
+public class guess_the_number {
+    public static void main(String[] args) {
+        Scanner sc= new Scanner(System.in);                 //scanner object created
+        Random num= new Random();           
+        int number=num.nextInt(100);
+        int userinput,i=0,s;
+        System.out.println("Enter number between 0 to 100");
+        do{  //do while loop
+            System.out.print("GUESS THE NUMBER : ");
+            userinput=sc.nextInt();
+            if(i<10){                                      //if-else statement
+                if(userinput >100){                        //nested if-else statement
+                    System.out.println("ERROR !! Number greater than 100");
+                }
+                else if(userinput == number){
+                    System.out.println();
+                    System.out.println("YOU GUESSED CORRECT !!");
+                }
+                else if(userinput<number){
+                    System.out.println("YOU HAVE ENTERED SMALLER NUMBER");
+                }
+                else if(userinput>number){
+                    System.out.println("YOU HAVE ENTERED GREATER NUMBER");
+                }
+            }
+            else{    
+                System.out.println();
+                System.out.println("GAME OVER !!  TRY AGAIN ");
+                System.out.println("GENERATED NUMBER WAS : "+number);
+            }
+            i=i+1;                                        //increment operation
+            s=10-i;
+        }
+        while(userinput!= number);
+        System.out.println();
+        System.out.println("Attempt : "+i);
+        System.out.println("SCORE : "+s);
+    }
+
+}
