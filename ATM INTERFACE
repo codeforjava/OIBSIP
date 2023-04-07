@@ -1,0 +1,126 @@
+import java.util.Scanner;
+
+class data {                                                        
+    int pin=1234;
+    float balance=12000f;
+
+}
+
+class ATM extends data {                                            
+    
+    Scanner sc = new Scanner(System.in);                       
+    void cheakpin() {
+        System.out.print("Enter PIN :");
+        int enteredpin = sc.nextInt();
+        if (enteredpin == pin) {
+            option();
+        } else {
+            System.out.println("You have ENTERED wrong Pin,Cheak before Re-enter");
+            cheakpin();
+        }
+    }
+
+    public void option() {
+        System.out.println();
+        System.out.println("Choose Option");
+        System.out.println("1 for  Withdraw");
+        System.out.println("2 for deposit");
+        System.out.println("3 for Cheak Balance");
+        System.out.println("4 for Transfer");
+        System.out.println("5 for Change PIN");
+        System.out.println("6 for quit");
+        System.out.print("OPTION : ");
+        int option = sc.nextInt();
+        switch (option) {
+            case 1:
+                withdraw();
+                break;
+            case 2:
+                deposit();
+                break;
+            case 3:
+                cheakBalance();
+                break;
+            case 4:
+                transfer();
+                break;
+            case 5:
+                changePin();
+                break;
+            case 6:
+                quit();
+                break;
+            default:
+                System.out.println("Something Went Wrong");
+                cheakpin();                        
+        }
+    }
+
+    public void withdraw() {
+        System.out.print("Enter Amount : ");
+        float withdrawAmount = sc.nextFloat();
+        if (withdrawAmount > balance) {
+            System.out.println("Insufficient Balance");
+        } else {
+            balance = balance - withdrawAmount;
+            System.out.println("Withdrawing Money");
+            System.out.println("Amount Withdraw Succesfully");
+            System.out.println();
+        }
+        option();
+    }
+
+    public void deposit() {
+        System.out.print("Enter Amount : ");
+        float depositAmount = sc.nextFloat();
+        balance = balance + depositAmount;
+        System.out.println("DEPOSITED SUCESSFULLY");
+        System.out.println();
+        option();
+    }
+
+    public void cheakBalance() {
+        System.out.print("BALANCE : " + balance);
+        System.out.println();
+        option();
+    }
+
+    public void transfer() {
+        System.out.print("Enter Account Number :");
+        long acc = sc.nextLong();
+        System.out.print("Enter Amount :");
+        float transferAmount = sc.nextFloat();
+        if(transferAmount>balance){
+            System.out.println("Insufficient Balance");
+            transfer();
+        }
+        else{
+            balance = balance - transferAmount;
+            System.out.println("Money Transfered Successfully");
+            System.out.println();
+        }
+        option();
+
+    }
+    public void changePin(){
+        System.out.print("Enter new PIN : ");
+        pin=sc.nextInt();
+        System.out.println();
+        cheakpin();
+    }
+
+    public void quit() {
+        System.out.println("Thank YOU! VISIT AGAIN");
+        cheakpin();
+    }
+}
+
+public class ATM_INTERFACE {
+    public static void main(String[] args) {
+        ATM atm = new ATM();
+        System.out.println("WELCOME");
+        atm.cheakpin();
+
+    }
+
+}
